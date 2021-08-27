@@ -60,7 +60,10 @@ module TTY
         if @selected.include?(active_choice)
           @selected.delete_at(@active - 1)
         else
-          if active_choice == @reset_choice || @selected.include?(@reset_choice)
+          if @reset_choice && (
+               active_choice == @reset_choice ||
+               @selected.include?(@reset_choice)
+             )
             @selected.clear
           end
           return if @max && @selected.size >= @max
